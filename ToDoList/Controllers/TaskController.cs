@@ -24,7 +24,7 @@ namespace ToDoList.Controllers
         {
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetAllTasks), new { id = task.Id }, task);
+            return CreatedAtAction(nameof(GetAllTasks), new { id = task.TaskId }, task);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> FindTask(int id)
@@ -38,7 +38,6 @@ namespace ToDoList.Controllers
         {
             var taskToUpdate = await _context.Tasks.FindAsync(id);
             if (taskToUpdate == null) return NotFound();
-            taskToUpdate.Id = task.Id;
             taskToUpdate.Name = task.Name;
             await _context.SaveChangesAsync();
             return NoContent();

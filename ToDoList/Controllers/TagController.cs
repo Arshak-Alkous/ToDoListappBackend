@@ -24,7 +24,7 @@ namespace ToDoList.Controllers
          {
              _context.Tags.Add(tag);
              await _context.SaveChangesAsync();
-             return CreatedAtAction(nameof(GetAllTags), new {id=tag.Id},tag);
+             return CreatedAtAction(nameof(GetAllTags), new {id=tag.TagId},tag);
          }
          [HttpGet("{id}")]
          public async Task<IActionResult> FindTag(int id)
@@ -38,7 +38,6 @@ namespace ToDoList.Controllers
          {
              var tagToUpdate=await _context.Tags.FindAsync(id);
              if (tagToUpdate==null) return NotFound();
-             tagToUpdate.Id = tag.Id;
              tagToUpdate.Name = tag.Name;
              await _context.SaveChangesAsync();
              return NoContent();

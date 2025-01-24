@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
 using ToDoList.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,8 @@ var sitePolicy = "_site-policy";
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
 
 //Add database's service 
 builder.Services.AddDbContext<ToDoListContext>(options=>

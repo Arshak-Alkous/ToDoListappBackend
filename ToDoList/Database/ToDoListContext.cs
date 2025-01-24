@@ -8,6 +8,7 @@ namespace ToDoList.Database
         public ToDoListContext(DbContextOptions<ToDoListContext> options):base(options) { }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Models.Task> Tasks { get; set; }
-        public DbSet<Tag> Tags { get; set; }    
+        public DbSet<Tag> Tags { get; set; }
+       
     }
 }
