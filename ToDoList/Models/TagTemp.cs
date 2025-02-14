@@ -2,5 +2,6 @@
 {
     public class TagTemp
     {
+        public string Name { get; set; }
     }
 }

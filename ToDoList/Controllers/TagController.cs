@@ -20,8 +20,12 @@ namespace ToDoList.Controllers
              return Ok(tags);
          }
          [HttpPost]
-         public async Task<IActionResult> CreateNewTag([FromBody]Tag tag)
+         public async Task<IActionResult> CreateNewTag([FromBody]TagTemp tagtemp)
          {
+            var tag=new Tag
+            {
+                Name = tagtemp.Name
+            };
              _context.Tags.Add(tag);
              await _context.SaveChangesAsync();
              return CreatedAtAction(nameof(GetAllTags), new {id=tag.TagId},tag);
@@ -34,11 +38,11 @@ namespace ToDoList.Controllers
              return Ok(tag);
          }
          [HttpPut("{id}")]
-         public async Task<IActionResult> UpdateTag(int id , [FromBody]Tag tag)
+         public async Task<IActionResult> UpdateTag(int id , [FromBody]TagTemp tagtemp)
          {
              var tagToUpdate=await _context.Tags.FindAsync(id);
              if (tagToUpdate==null) return NotFound();
-             tagToUpdate.Name = tag.Name;
+             tagToUpdate.Name = tagtemp.Name;
              await _context.SaveChangesAsync();
              return NoContent();
          }
